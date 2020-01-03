@@ -16,16 +16,6 @@ export class InjectorSpec {
     @TestCase('TestString')
     @TestCase(null)
     @Test('it should register an injectable')
-    public register<T>(value: T): void {
-        const token: Token<T> = this.injector.register(value);
-
-        Expect(this.injector.get(token)).toBe(value);
-    }
-
-    @TestCase(new (class TestClass {})())
-    @TestCase('TestString')
-    @TestCase(null)
-    @Test('it should register an injectable')
     public set<T>(value: T): void {
         const token: Token<T> = new Token<T>(value);
 

@@ -11,14 +11,6 @@ export class Injector {
         this.clear();
     }
 
-    public register<T>(value: T): Token<T> {
-        const token: Token<T> = new Token<T>(value);
-
-        this.set(token, value);
-
-        return token;
-    }
-
     public set<T>(token: Token<T>, value: T): void {
         this._registry[token.symbol as any] = value;
     }
