@@ -1,0 +1,19 @@
+{
+  "name": "avaritia",
+  "version": "1.0.0",
+  "description": "Lightweight DI framework",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "alsatian ./src/**/*.spec.ts"
+  },
+  "author": "Anthony Cleaver",
+  "license": "ISC",
+  "devDependencies": {
+    "@cleavera/config": "^1.2.0",
+    "@types/node": "^13.1.2",
+    "alsatian": "^3.1.0",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.4"
+  }
+}
