@@ -4,7 +4,10 @@
   "description": "Lightweight DI framework",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "npm run clean && tsc",
+    "clean": "del-cli ./dist",
+    "lint": "tslint --project ./tsconfig.json",
+    "prepack": "npm run lint && npm run build && npm run test",
     "test": "alsatian ./src/**/*.spec.ts"
   },
   "author": "Anthony Cleaver",
@@ -13,6 +16,7 @@
     "@cleavera/config": "^1.2.0",
     "@types/node": "^13.1.2",
     "alsatian": "^3.1.0",
+    "del-cli": "^3.0.0",
     "tslint": "^5.20.1",
     "typescript": "^3.7.4"
   },
