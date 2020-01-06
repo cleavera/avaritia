@@ -4,7 +4,7 @@ Avaritia is a lightweight DI framework for dependency injection.
 
 ## Quickstart
 
-The avaritia library comes with a global injector, if you're happy to use this then you can use the decorator pattern to get DI up and running quickly.
+The avaritia library comes with a global injector, if you're happy to use this then you can use decorators to get DI up and running quickly.
 
 ```typescript
 import { Token } from 'avaritia'; 
