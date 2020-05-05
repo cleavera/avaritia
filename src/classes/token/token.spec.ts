@@ -5,7 +5,7 @@ import { Token } from './token';
 
 @TestFixture('when creating a token')
 export class TokenSpec {
-    @TestCase(new MockClass(), 'TestClass')
+    @TestCase(new MockClass(), 'MockClass')
     @TestCase('', 'String')
     @TestCase(null, 'AvaritiaToken')
     @Test('it should create a symbol')
