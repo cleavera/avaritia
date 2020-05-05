@@ -1,11 +1,11 @@
 import { Expect, Test, TestCase, TestFixture } from 'alsatian';
-import { Token } from './token';
 
-// tslint:disable max-classes-per-file
+import { MockClass } from '../mock-class/mock-class';
+import { Token } from './token';
 
 @TestFixture('when creating a token')
 export class TokenSpec {
-    @TestCase(new (class TestClass {})(), 'TestClass')
+    @TestCase(new MockClass(), 'TestClass')
     @TestCase('', 'String')
     @TestCase(null, 'AvaritiaToken')
     @Test('it should create a symbol')

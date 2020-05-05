@@ -1,9 +1,13 @@
-import { $isNull, Maybe } from '@cleavera/utils';
+import { Maybe } from '@cleavera/types';
+import { isNull } from '@cleavera/utils';
+
 import { Token } from '../token/token';
 
-const noop: () => null = (): null => null;
+const noop: () => null = (): null => {
+    return null;
+};
 
-// tslint:disable no-any
+/* eslint @typescript-eslint/no-explicit-any: 0 */
 // As typescript doesn't play nice with symbols
 
 export class Injector {
@@ -14,14 +18,16 @@ export class Injector {
     }
 
     public setValue<T>(token: Token<T>, value: T): void {
-        this._set(token, () => value);
+        this._set(token, () => {
+            return value;
+        });
     }
 
     public setFactory<T>(token: Token<T>, factory: () => T): void {
         let value: Maybe<T> = null;
 
         this._set(token, () => {
-            if ($isNull(value)) {
+            if (isNull(value)) { // eslint-disable-line @typescript-eslint/strict-boolean-expressions
                 value = factory();
             }
 
@@ -30,7 +36,7 @@ export class Injector {
     }
 
     public get<T>(token: Token<T>): Maybe<T> {
-        return (this._registry[token.symbol as any] || noop)();
+        return (this._registry[token.symbol as any] ?? noop)();
     }
 
     public clear(): void {

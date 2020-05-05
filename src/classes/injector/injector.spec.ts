@@ -1,8 +1,8 @@
 import { Expect, Test, TestCase, TestFixture } from 'alsatian';
+
+import { MockClass } from '../mock-class/mock-class';
 import { Token } from '../token/token';
 import { Injector } from './injector';
-
-// tslint:disable max-classes-per-file
 
 @TestFixture('when creating a token')
 export class InjectorSpec {
@@ -12,7 +12,7 @@ export class InjectorSpec {
         this.injector = new Injector();
     }
 
-    @TestCase(new (class TestClass {})())
+    @TestCase(new MockClass())
     @TestCase('TestString')
     @TestCase(null)
     @Test('it should register an injectable')
@@ -24,14 +24,16 @@ export class InjectorSpec {
         Expect(this.injector.get(token)).toBe(value);
     }
 
-    @TestCase(new (class TestClass {})())
+    @TestCase(new MockClass())
     @TestCase('TestString')
     @TestCase(null)
     @Test('it should register an injectable')
     public setFactory<T>(value: T): void {
         const token: Token<T> = new Token<T>(value);
 
-        this.injector.setFactory(token, () => value);
+        this.injector.setFactory(token, () => {
+            return value;
+        });
 
         Expect(this.injector.get(token)).toBe(value);
     }

@@ -6,21 +6,28 @@
   "scripts": {
     "build": "npm run clean && tsc",
     "clean": "del-cli ./dist",
-    "lint": "tslint --project ./tsconfig.json",
+    "lint": "npx eslint ./src/**/*.ts",
     "prepack": "npm run lint && npm run build && npm run test",
     "test": "alsatian ./src/**/*.spec.ts"
   },
   "author": "Anthony Cleaver",
   "license": "ISC",
   "devDependencies": {
-    "@cleavera/config": "^1.2.0",
-    "@types/node": "^13.1.2",
-    "alsatian": "^3.1.0",
+    "@cleavera/config": "^2.4.0",
+    "@types/node": "^13.9.0",
+    "@typescript-eslint/eslint-plugin": "^2.31.0",
+    "@typescript-eslint/parser": "^2.31.0",
+    "alsatian": "^3.2.1",
     "del-cli": "^3.0.0",
-    "tslint": "^5.20.1",
-    "typescript": "^3.7.4"
+    "eslint": "^6.8.0",
+    "eslint-plugin-import": "^2.20.2",
+    "typescript": "^3.8.3"
   },
   "dependencies": {
-    "@cleavera/utils": "^3.4.0"
-  }
+    "@cleavera/types": "^1.0.3",
+    "@cleavera/utils": "^4.0.0"
+  },
+  "files": [
+    "dist"
+  ]
 }

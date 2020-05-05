@@ -1,6 +1,7 @@
-// tslint:disable max-classes-per-file
+/* eslint max-classes-per-file: 0 */
 
 import { Expect, Test, TestFixture } from 'alsatian';
+
 import { Token } from '../../classes/token/token';
 import { GLOBAL_INJECTOR } from '../../constants/global-injector.constant';
 import { Inject } from './inject.decorator';
