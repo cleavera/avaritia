@@ -1,6 +1,6 @@
 {
   "name": "avaritia",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Lightweight DI framework",
   "main": "./dist/index.js",
   "scripts": {
