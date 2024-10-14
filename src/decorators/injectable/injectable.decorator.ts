@@ -5,7 +5,7 @@ import { GLOBAL_INJECTOR } from '../../constants/global-injector.constant';
 export function Injectable<T>(token: Token<T>, injector: Injector = GLOBAL_INJECTOR): ClassDecorator {
     return (Target: Function): void => {
         injector.setFactory(token, () => {
-            return new (Target as any)(); // eslint-disable-line @typescript-eslint/no-explicit-any
+            return new (Target as any)();
         });
     };
 }

@@ -7,9 +7,6 @@ const noop: () => null = (): null => {
     return null;
 };
 
-/* eslint @typescript-eslint/no-explicit-any: 0 */
-// As typescript doesn't play nice with symbols
-
 export class Injector {
     private _registry: any;
 
@@ -27,7 +24,7 @@ export class Injector {
         let value: Maybe<T> = null;
 
         this._set(token, () => {
-            if (isNull(value)) { // eslint-disable-line @typescript-eslint/strict-boolean-expressions
+            if (isNull(value)) {
                 value = factory();
             }
 

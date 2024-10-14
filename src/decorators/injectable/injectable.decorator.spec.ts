@@ -1,5 +1,3 @@
-/* eslint max-classes-per-file: 0 */
-
 import { Expect, Test, TestFixture } from 'alsatian';
 
 import { Injector } from '../../classes/injector/injector';
