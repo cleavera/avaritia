@@ -4,28 +4,30 @@ Avaritia is a lightweight DI framework for dependency injection.
 
 ## Quickstart
 
-The avaritia library comes with a global injector, if you're happy to use this then you can use decorators to get DI up and running quickly.
+Create an injector and then use the Injectable decorator to register classes, call injector.get(TOKEN) to then inject the dependencies
 
 ```typescript
+import { Injector } from 'avaritia';
+
+const INJECTOR: Injector = new Injector();
+
 import { Token } from 'avaritia'; 
 
 const LOGGER: Token = new Token();
 
 import { Injectable } from 'avaritia';
 
-@Injectable(LOGGER)
+@Injectable(LOGGER, INJECTOR)
 class ConsoleLogger implements ILogger {
     public log(message: string): void {
         console.log(message);
     }
 }
 
-import { GLOBAL_INJECTOR, Inject } from 'avaritia';
-
 class Counter {
     private _count: number = 0;
 
-    private _logger!: ILogger = GLOBAL_INJECTOR.get(LOGGER);
+    private _logger!: ILogger = INJECTOR.get(LOGGER);
 
     public count() {
         this._count++;
