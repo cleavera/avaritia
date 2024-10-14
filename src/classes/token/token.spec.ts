@@ -1,17 +1,32 @@
-import { Expect, Test, TestCase, TestFixture } from 'alsatian';
-
+import assert from 'node:assert';
+import test, { describe } from 'node:test';
 import { MockClass } from '../mock-class/mock-class';
 import { Token } from './token';
 
-@TestFixture('when creating a token')
-export class TokenSpec {
-    @TestCase(new MockClass(), 'MockClass')
-    @TestCase('', 'String')
-    @TestCase(null, 'AvaritiaToken')
-    @Test('it should create a symbol')
-    public createSymbol<T>(value: T, label: string): void {
-        const token: Token<T> = new Token<T>(value);
+describe('Token', () => {
+    describe('when creating a token', () => {
+        test('it should create a symbol for MockClass', () => {
+            const value = new MockClass();
+            const label = 'MockClass';
+            const token = new Token(value);
 
-        Expect(token.symbol.toString()).toBe(`Symbol(${label})`);
-    }
-}
+            assert.strictEqual(token.symbol.toString(), `Symbol(${label})`);
+        });
+
+        test('it should create a symbol for an empty string', () => {
+            const value = '';
+            const label = 'String';
+            const token = new Token(value);
+
+            assert.strictEqual(token.symbol.toString(), `Symbol(${label})`);
+        });
+
+        test('it should create a symbol for null', () => {
+            const value = null;
+            const label = 'AvaritiaToken';
+            const token = new Token(value);
+
+            assert.strictEqual(token.symbol.toString(), `Symbol(${label})`);
+        });
+    });
+});

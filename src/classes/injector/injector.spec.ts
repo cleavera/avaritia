@@ -1,47 +1,69 @@
-import { Expect, Test, TestCase, TestFixture } from 'alsatian';
-
+import * as assert from 'node:assert';
+import test, { beforeEach, describe } from 'node:test';
 import { MockClass } from '../mock-class/mock-class';
 import { Token } from '../token/token';
 import { Injector } from './injector';
 
-@TestFixture('when creating a token')
-export class InjectorSpec {
-    public injector: Injector;
+describe('Injector', () => {
+    let injector: Injector;
 
-    constructor() {
-        this.injector = new Injector();
-    }
+    beforeEach(() => {
+        injector = new Injector();
+    });
 
-    @TestCase(new MockClass())
-    @TestCase('TestString')
-    @TestCase(null)
-    @Test('it should register an injectable')
-    public setValue<T>(value: T): void {
-        const token: Token<T> = new Token<T>(value);
+    describe('when creating a token', () => {
+        test('it should register an injectable with value (MockClass)', () => {
+            const value = new MockClass();
+            const token = new Token(value);
 
-        this.injector.setValue(token, value);
-
-        Expect(this.injector.get(token)).toBe(value);
-    }
-
-    @TestCase(new MockClass())
-    @TestCase('TestString')
-    @TestCase(null)
-    @Test('it should register an injectable')
-    public setFactory<T>(value: T): void {
-        const token: Token<T> = new Token<T>(value);
-
-        this.injector.setFactory(token, () => {
-            return value;
+            injector.setValue(token, value);
+            assert.strictEqual(injector.get(token), value);
         });
 
-        Expect(this.injector.get(token)).toBe(value);
-    }
+        test('it should register an injectable with value (TestString)', () => {
+            const value = 'TestString';
+            const token = new Token(value);
 
-    @Test('it should register an injectable')
-    public getMissingValue(): void {
-        const token: Token<string> = new Token<string>('');
+            injector.setValue(token, value);
+            assert.strictEqual(injector.get(token), value);
+        });
 
-        Expect(this.injector.get(token)).toBe(null);
-    }
-}
+        test('it should register an injectable with value (null)', () => {
+            const value = null;
+            const token = new Token(value);
+
+            injector.setValue(token, value);
+            assert.strictEqual(injector.get(token), value);
+        });
+
+        test('it should register an injectable with a factory (MockClass)', () => {
+            const value = new MockClass();
+            const token = new Token(value);
+
+            injector.setFactory(token, () => value);
+            assert.strictEqual(injector.get(token), value);
+        });
+
+        test('it should register an injectable with a factory (TestString)', () => {
+            const value = 'TestString';
+            const token = new Token(value);
+
+            injector.setFactory(token, () => value);
+            assert.strictEqual(injector.get(token), value);
+        });
+
+        test('it should register an injectable with a factory (null)', () => {
+            const value = null;
+            const token = new Token(value);
+
+            injector.setFactory(token, () => value);
+            assert.strictEqual(injector.get(token), value);
+        });
+
+        test('it should return null for a missing value', () => {
+            const token = new Token<string>('');
+            assert.strictEqual(injector.get(token), null);
+        });
+    });
+});
+

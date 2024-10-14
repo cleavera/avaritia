@@ -7,13 +7,12 @@
     "build": "npm run clean && tsc",
     "clean": "npx del-cli ./dist",
     "prepack": "npm run build && npm run test",
-    "test": "alsatian ./src/**/*.spec.ts"
+    "test": "npm run build && node --test dist/**/*.spec.js"
   },
   "author": "Anthony Cleaver",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^22.7.5",
-    "alsatian": "^3.2.1",
     "typescript": "^5.6.3"
   },
   "files": [
