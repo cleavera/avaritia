@@ -5,27 +5,20 @@
   "main": "./dist/index.js",
   "scripts": {
     "build": "npm run clean && tsc",
-    "clean": "del-cli ./dist",
-    "lint": "npx eslint ./src/**/*.ts",
-    "prepack": "npm run lint && npm run build && npm run test",
+    "clean": "npx del-cli ./dist",
+    "prepack": "npm run build && npm run test",
     "test": "alsatian ./src/**/*.spec.ts"
   },
   "author": "Anthony Cleaver",
   "license": "ISC",
   "devDependencies": {
-    "@cleavera/config": "^2.4.0",
-    "@types/node": "^13.13.5",
-    "@typescript-eslint/eslint-plugin": "^2.31.0",
-    "@typescript-eslint/parser": "^2.31.0",
+    "@types/node": "^22.7.5",
     "alsatian": "^3.2.1",
-    "del-cli": "^3.0.0",
-    "eslint": "^6.8.0",
-    "eslint-plugin-import": "^2.20.2",
-    "typescript": "^3.8.3"
+    "typescript": "^5.6.3"
   },
   "dependencies": {
     "@cleavera/types": "^1.0.3",
-    "@cleavera/utils": "^4.1.0"
+    "@cleavera/utils": "^4.2.1"
   },
   "files": [
     "dist"
