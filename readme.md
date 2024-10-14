@@ -20,13 +20,12 @@ class ConsoleLogger implements ILogger {
     }
 }
 
-import { Inject } from 'avaritia';
+import { GLOBAL_INJECTOR, Inject } from 'avaritia';
 
 class Counter {
     private _count: number = 0;
 
-    @Inject(LOGGER)
-    private _logger!: ILogger;
+    private _logger!: ILogger = GLOBAL_INJECTOR.get(LOGGER);
 
     public count() {
         this._count++;
