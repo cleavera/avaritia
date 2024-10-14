@@ -1,8 +1,9 @@
 import * as assert from 'node:assert';
 import test, { beforeEach, describe } from 'node:test';
-import { MockClass } from '../mock-class/mock-class';
 import { Token } from '../token/token';
 import { Injector } from './injector';
+
+class MockClass {}
 
 describe('Injector', () => {
     let injector: Injector;

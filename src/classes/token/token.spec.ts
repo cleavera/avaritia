@@ -1,7 +1,8 @@
 import assert from 'node:assert';
 import test, { describe } from 'node:test';
-import { MockClass } from '../mock-class/mock-class';
 import { Token } from './token';
+
+class MockClass {}
 
 describe('Token', () => {
     describe('when creating a token', () => {
