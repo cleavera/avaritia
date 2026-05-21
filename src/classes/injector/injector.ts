@@ -1,5 +1,7 @@
 import { Token } from '../token/token';
 
+const UNINITIALISED: unique symbol = Symbol('uninitialised');
+
 const noop: () => null = (): null => {
   return null;
 };
@@ -18,10 +20,10 @@ export class Injector {
   }
 
   public setFactory<T>(token: Token<T>, factory: () => T): void {
-    let value: T | null = null;
+    let value: T | typeof UNINITIALISED = UNINITIALISED;
 
     this._set(token, () => {
-      if (value === null) {
+      if (value === UNINITIALISED) {
         value = factory();
       }
 

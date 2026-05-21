@@ -56,9 +56,12 @@ describe('Injector', () => {
         test('it should register an injectable with a factory (null)', () => {
             const value = null;
             const token = new Token(value);
+            let callCount = 0;
 
-            injector.setFactory(token, () => value);
+            injector.setFactory(token, () => { callCount++; return value; });
             assert.strictEqual(injector.get(token), value);
+            assert.strictEqual(injector.get(token), value);
+            assert.strictEqual(callCount, 1);
         });
 
         test('it should return null for a missing value', () => {
