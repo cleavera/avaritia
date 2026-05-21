@@ -7,11 +7,7 @@ const noop: () => null = (): null => {
 };
 
 export class Injector {
-  private _registry: any;
-
-  constructor() {
-    this.clear();
-  }
+  private _registry: { [key: symbol]: () => unknown } = {};
 
   public setValue<T>(token: Token<T>, value: T): void {
     this._set(token, () => {
@@ -32,14 +28,10 @@ export class Injector {
   }
 
   public get<T>(token: Token<T>): T | null {
-    return (this._registry[token.symbol as any] ?? noop)();
-  }
-
-  public clear(): void {
-    this._registry = {};
+    return (this._registry[token.symbol] ?? noop)() as T | null;
   }
 
   private _set<T>(token: Token<T>, func: () => T): void {
-    this._registry[token.symbol as any] = func;
+    this._registry[token.symbol] = func;
   }
 }
